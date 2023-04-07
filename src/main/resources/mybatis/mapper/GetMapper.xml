@@ -8,4 +8,32 @@
         select *
         from AccessToken;
     </select>
+    <select id="findAuthorizedMemberList" resultType="com.example.miniProj2.domain.dto.MemberDto">
+        select CONVERT(AES_DECRYPT(UNHEX(userNm), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'userNm'
+        , CONVERT(AES_DECRYPT(UNHEX(phoneNo), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'phoneNo'
+        , CONVERT(AES_DECRYPT(UNHEX(birthday), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'birthday'
+        , CONVERT(AES_DECRYPT(UNHEX(gender), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'gender'
+        , companyCd
+        , telcoTycd
+        , reqTxId
+        from member;
+    </select>
+    <select id="findMemberByCertTxId" resultType="com.example.miniProj2.domain.dto.MemberDto">
+        select companyCd
+             , telcoTxId
+             , telcoTycd
+             , CONVERT(AES_DECRYPT(UNHEX(phoneNo), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'phoneNo'
+             , CONVERT(AES_DECRYPT(UNHEX(userNm), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'userNm'
+             , CONVERT(AES_DECRYPT(UNHEX(birthday), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'birthday'
+             , CONVERT(AES_DECRYPT(UNHEX(gender), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) AS 'gender'
+             , reqTxId
+             , certTxId
+             , reqEndDttm
+        from member
+        where certTxId = #{certTxId}
+    </select>
 </mapper>
+
+
+
+

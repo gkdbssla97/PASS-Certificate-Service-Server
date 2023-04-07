@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.miniProj2.domain.dao.PostMapper">
+    <update id="saveTxId">
+        update member
+        set telcoTxId = #{memberVO.telcoTxId},
+            reqTxId = #{memberVO.reqTxId},
+            certTxId = #{memberVO.certTxId},
+            reqEndDttm = #{memberVO.reqEndDttm}
+        where CONVERT(AES_DECRYPT(UNHEX(userNm), 'YzNmOGQ2OGI1ZDEwNDA5YmJmZmRhMTI5') USING UTF8) = #{memberVO.userNm}
+    </update>
+    <insert id="saveVerificationResult">
+        insert into verification ( reqTxId, telcoTxId, certTxId, resultTycd
+                                 , resultDttm, digitalSign, CI, userNm
+                                 , birthday, gender, phoneNo, telcoTycd)
+        values (#{VerificationResponseDto.reqTxId},
+                #{VerificationResponseDto.telcoTxId},
+                #{VerificationResponseDto.certTxId},
+                #{VerificationResponseDto.resultTycd},
+                #{VerificationResponseDto.resultDttm},
+                #{VerificationResponseDto.digitalSign},
+                #{VerificationResponseDto.CI},
+                #{VerificationResponseDto.userNm},
+                #{VerificationResponseDto.birthday},
+                #{VerificationResponseDto.gender},
+                #{VerificationResponseDto.phoneNo},
+                #{VerificationResponseDto.telcoTycd});
+    </insert>
+</mapper>
