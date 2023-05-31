@@ -9,4 +9,6 @@
 2. 전자서명 검증
 3. 검증결과 요청
 
-ERD
+#### ERD
+<img width="262" alt="image" src="https://github.com/gkdbssla97/PASS-Certificate-Service-Server/assets/55674664/b0a84f31-e0b4-4e85-9573-299aa88b848a">
+
